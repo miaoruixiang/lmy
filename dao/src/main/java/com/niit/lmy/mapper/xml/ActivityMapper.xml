@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.lmy.mapper.ActivityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.niit.lmy.entity.Activity">
+        <id column="activity_id" property="activityId" />
+        <result column="publish_user_account" property="publishUserAccount" />
+        <result column="activity_type" property="activityType" />
+        <result column="activity_title" property="activityTitle" />
+        <result column="activity_group" property="activityGroup" />
+        <result column="activity_experience" property="activityExperience" />
+        <result column="activity_info" property="activityInfo" />
+        <result column="activity_status" property="activityStatus" />
+        <result column="activity_start_time" property="activityStartTime" />
+        <result column="activity_end_time" property="activityEndTime" />
+    </resultMap>
+
+</mapper>

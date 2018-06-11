@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.lmy.mapper.UserCourseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.niit.lmy.entity.UserCourse">
+        <id column="id" property="id" />
+        <result column="user_account" property="userAccount" />
+        <result column="course_id" property="courseId" />
+        <result column="user_experience" property="userExperience" />
+        <result column="user_nickname" property="userNickname" />
+        <result column="user_number" property="userNumber" />
+        <result column="user_resource_experience" property="userResourceExperience" />
+        <result column="user_activity_experience" property="userActivityExperience" />
+        <result column="user_resource_check_number" property="userResourceCheckNumber" />
+        <result column="user_activity_join_number" property="userActivityJoinNumber" />
+    </resultMap>
+
+</mapper>

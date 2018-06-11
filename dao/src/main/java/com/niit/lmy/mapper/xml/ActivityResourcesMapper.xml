@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.lmy.mapper.ActivityResourcesMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.niit.lmy.entity.ActivityResources">
+        <id column="activity_resource_id" property="activityResourceId" />
+        <result column="activity_id" property="activityId" />
+        <result column="activity_resource_url" property="activityResourceUrl" />
+    </resultMap>
+
+</mapper>

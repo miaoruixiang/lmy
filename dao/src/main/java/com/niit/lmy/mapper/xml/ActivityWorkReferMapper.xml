@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.lmy.mapper.ActivityWorkReferMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.niit.lmy.entity.ActivityWorkRefer">
+        <id column="work_refer_id" property="workReferId" />
+        <result column="activity_id" property="activityId" />
+        <result column="refer_user_account" property="referUserAccount" />
+        <result column="work_refer_info" property="workReferInfo" />
+        <result column="work_refer_time" property="workReferTime" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.lmy.mapper.UserInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.niit.lmy.entity.UserInfo">
+        <id column="id" property="id" />
+        <result column="user_account" property="userAccount" />
+        <result column="user_nickname" property="userNickname" />
+        <result column="user_name" property="userName" />
+        <result column="user_avatar" property="userAvatar" />
+        <result column="user_birth" property="userBirth" />
+        <result column="user_sex" property="userSex" />
+        <result column="user_school" property="userSchool" />
+        <result column="user_department" property="userDepartment" />
+        <result column="user_job" property="userJob" />
+        <result column="user_number" property="userNumber" />
+        <result column="user_mobile" property="userMobile" />
+        <result column="user_email" property="userEmail" />
+        <result column="user_experience" property="userExperience" />
+        <result column="user_charm" property="userCharm" />
+        <result column="user_create_course" property="userCreateCourse" />
+        <result column="user_student" property="userStudent" />
+        <result column="user_publish_resources" property="userPublishResources" />
+        <result column="user_create_activity" property="userCreateActivity" />
+        <result column="user_create_attendance" property="userCreateAttendance" />
+        <result column="user_join_class" property="userJoinClass" />
+        <result column="user_join_attendance" property="userJoinAttendance" />
+        <result column="user_see_resources" property="userSeeResources" />
+        <result column="user_join_activity" property="userJoinActivity" />
+        <result column="user_video_study_number" property="userVideoStudyNumber" />
+        <result column="user_video_study_time" property="userVideoStudyTime" />
+        <result column="user_discuss" property="userDiscuss" />
+        <result column="user_laud" property="userLaud" />
+        <result column="user_create_time" property="userCreateTime" />
+        <result column="user_update_time" property="userUpdateTime" />
+    </resultMap>
+
+</mapper>

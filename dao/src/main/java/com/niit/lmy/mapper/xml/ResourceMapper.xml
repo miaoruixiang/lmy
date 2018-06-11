@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.niit.lmy.mapper.ResourceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.niit.lmy.entity.Resource">
+        <id column="resource_id" property="resourceId" />
+        <result column="publish_user_account" property="publishUserAccount" />
+        <result column="resource_group" property="resourceGroup" />
+        <result column="resource_experience" property="resourceExperience" />
+        <result column="resource_knowledge" property="resourceKnowledge" />
+        <result column="resource_ask" property="resourceAsk" />
+        <result column="resource_status" property="resourceStatus" />
+        <result column="resource_type" property="resourceType" />
+        <result column="resource_url" property="resourceUrl" />
+        <result column="resource_publish_time" property="resourcePublishTime" />
+    </resultMap>
+
+</mapper>
