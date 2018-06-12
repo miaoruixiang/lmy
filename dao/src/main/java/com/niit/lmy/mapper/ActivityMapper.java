@@ -38,4 +38,6 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 
     @Select("SELECT MAX(activity_id) FROM t_activity")
     Integer getActivityId();
+
+//    @Select("SELECT * FROM t_activity AS a,t_group AS b,t_user_info AS c WHERE a.activity_group = b.group_id AND a.publish_user_account = c.user_account AND a.activity_id")
 }

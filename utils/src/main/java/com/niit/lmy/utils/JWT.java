@@ -3,10 +3,8 @@ package com.niit.lmy.utils;
 import com.auth0.jwt.JWTSigner;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.internal.com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.velocity.runtime.directive.Foreach;
 import org.json.JSONObject;
 import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -67,22 +65,17 @@ public class JWT {
         }
     }
 
+    public static void main(String[] args) {
+        String n = sign("13153464a6sd",6000000,"666");
+        System.out.println(n);
 
-    public static void main (String args[]){
-        String a = sign("aaa", 60 * 60 * 60, "aaa");
-        System.out.println(a);
-
-//        BASE64Encoder encoder = new BASE64Encoder();
-//        String jdkEncode = encoder.encode(new String(a.split("\\.")[1]).getBytes());
-//        System.out.println("JDKEncode-->" + jdkEncode);
+//        System.out.println(n.split("\\.")[1]);
 
         BASE64Decoder decoder = new BASE64Decoder();
         try {
-
-            String decode = new String(decoder.decodeBuffer(a.split("\\.")[1]));
-            JSONObject jsonObject = new JSONObject(decode);
+            JSONObject jsonObject =  new JSONObject(new  String(decoder.decodeBuffer(n.split("\\.")[1])));
             String payload = jsonObject.getString("payload");
-            System.out.println(payload.substring(1,payload.length()));
+            System.out.println(payload.replace("\"","").replace("\"",""));
         } catch (IOException e) {
             e.printStackTrace();
         }

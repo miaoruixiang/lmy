@@ -8,17 +8,14 @@ import com.niit.lmy.mapper.UserInfoMapper;
 import com.niit.lmy.mapper.UserLoginMapper;
 import com.niit.lmy.service.RedisService;
 import com.niit.lmy.service.UserService;
-import com.niit.lmy.utils.ConstConfig;
-import com.niit.lmy.utils.ResponseMessage;
-import com.niit.lmy.utils.SendMessage;
+import com.niit.lmy.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.security.provider.MD5;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
 
 @Service //标志为一个Service组件
 @Transactional //事务注解
@@ -32,9 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkAccount(String mobile) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("user_account",mobile);
-        List<UserLogin> users = userLoginMapper.selectByMap(map);
+        List<UserLogin> users = userLoginMapper.selectList(
+                new EntityWrapper<UserLogin>().eq("user_account",mobile)
+        );
         if (users.size() != 0){
             return false;
         }else {
@@ -76,10 +73,21 @@ public class UserServiceImpl implements UserService {
     public ResponseMessage newUser(String mobile,String password) {
         ResponseMessage responseMessage = null;
         Date date = new Date();
+        String MD5password = null;
+        try {
+            MD5password =  MD5Util.encrypt(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        String uuid = UUIDUtils.getUUID();
+        String secret = RandomString.getRandomString();
 
         UserLogin userLogin = new UserLogin();
+
+        userLogin.setUuid(uuid);
         userLogin.setUserAccount(mobile);
-        userLogin.setUserPassword(password);
+        userLogin.setUserPassword(MD5password);
+        userLogin.setSecet(secret);
         userLogin.setCreateTime(date);
         userLogin.setUpdateTime(date);
 
@@ -110,6 +118,13 @@ public class UserServiceImpl implements UserService {
         JSONObject jsonObject = new JSONObject();
         String account = userLogin.getUserAccount();
         String password = userLogin.getUserPassword();
+        String MD5password = null;
+        try {
+            MD5password =  MD5Util.encrypt(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
         List<UserLogin> userLoginList = userLoginMapper.selectList(
                 new EntityWrapper<UserLogin>().eq("user_account",account)
         );
@@ -117,10 +132,15 @@ public class UserServiceImpl implements UserService {
                 new EntityWrapper<UserInfo>().eq("user_account",account)
         );
         UserLogin login = userLoginList.get(0);
+        String secret = login.getSecet();
+        String token = JWT.sign(login,30*24*60*60*1000,secret);
+        System.out.println(token);
+        redisService.set("token_"+account,token,1296000000);
+
         UserInfo userInfo = userInfoList.get(0);
-        jsonObject.put("userLogin",login);
+        jsonObject.put("token",token);
         jsonObject.put("userInfo",userInfo);
-        if (password.equals(login.getUserPassword())){
+        if (MD5password.equals(login.getUserPassword())){
             if (login.getUserStatus() == 0){
                 responseMessage = new ResponseMessage(ConstConfig.RESPONSE_OK,ConstConfig.USER_LOGIN_OK,jsonObject);
             }else {
@@ -139,7 +159,14 @@ public class UserServiceImpl implements UserService {
                 new EntityWrapper<UserLogin>().eq("user_account",account)
         ).get(0);
         Date date = new Date();
-        userLogin.setUserPassword(password);
+        String MD5password = password;
+        try {
+            MD5password =  MD5Util.encrypt(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        userLogin.setUserPassword(MD5password);
         userLogin.setUpdateTime(date);
         int n = 0;
         n = userLoginMapper.updateById(userLogin);
@@ -164,7 +191,11 @@ public class UserServiceImpl implements UserService {
         );
         UserLogin login = userLoginList.get(0);
         UserInfo userInfo = userInfoList.get(0);
-        jsonObject.put("userLogin",login);
+        String secret = login.getSecet();
+        String token = JWT.sign(login,30*24*60*60*1000,secret);
+        redisService.set("token_"+mobile,token,30*24*60*60*1000);
+
+        jsonObject.put("token",token);
         jsonObject.put("userInfo",userInfo);
         if (code.equals(trueCode)){
             if (login.getUserStatus() == 0){
