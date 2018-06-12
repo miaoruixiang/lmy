@@ -16,12 +16,13 @@
     <context:component-scan base-package="com.niit.lmy"/>
 
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/user/*"/> &lt;!&ndash; /user/*  &ndash;&gt;-->
-            <!--<bean class="com.niit.ybk.inteceptor.CheckMobileInterceptor"></bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- /user/*  -->
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="com.niit.lmy.Interceptor.HandlerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
     <!--启动注解-->
