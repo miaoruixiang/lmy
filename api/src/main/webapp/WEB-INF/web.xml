@@ -32,6 +32,7 @@
       <param-value>true</param-value>
     </init-param>
   </filter>
+
   <filter-mapping>
     <filter-name>Spring character encoding</filter-name>
     <url-pattern>/*</url-pattern>
