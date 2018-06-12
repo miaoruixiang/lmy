@@ -1,8 +1,6 @@
 package com.niit.lmy.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -14,15 +12,17 @@ import java.io.Serializable;
  * </p>
  *
  * @author miao
- * @since 2018-05-31
+ * @since 2018-06-12
  */
 @TableName("t_user_login")
 public class UserLogin extends Model<UserLogin> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    /**
+     * 主键
+     */
+    private String uuid;
     /**
      * 帐号
      */
@@ -33,6 +33,10 @@ public class UserLogin extends Model<UserLogin> {
      */
     @TableField("user_password")
     private String userPassword;
+    /**
+     * 密钥
+     */
+    private String secet;
     /**
      * 状态 0启用 1禁用
      */
@@ -50,12 +54,12 @@ public class UserLogin extends Model<UserLogin> {
     private Date updateTime;
 
 
-    public Integer getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
-    public UserLogin setId(Integer id) {
-        this.id = id;
+    public UserLogin setUuid(String uuid) {
+        this.uuid = uuid;
         return this;
     }
 
@@ -74,6 +78,15 @@ public class UserLogin extends Model<UserLogin> {
 
     public UserLogin setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+        return this;
+    }
+
+    public String getSecet() {
+        return secet;
+    }
+
+    public UserLogin setSecet(String secet) {
+        this.secet = secet;
         return this;
     }
 
@@ -104,11 +117,13 @@ public class UserLogin extends Model<UserLogin> {
         return this;
     }
 
-    public static final String ID = "id";
+    public static final String UUID = "uuid";
 
     public static final String USER_ACCOUNT = "user_account";
 
     public static final String USER_PASSWORD = "user_password";
+
+    public static final String SECET = "secet";
 
     public static final String USER_STATUS = "user_status";
 
@@ -118,15 +133,16 @@ public class UserLogin extends Model<UserLogin> {
 
     @Override
     protected Serializable pkVal() {
-        return this.id;
+        return this.uuid;
     }
 
     @Override
     public String toString() {
         return "UserLogin{" +
-        ", id=" + id +
+        ", uuid=" + uuid +
         ", userAccount=" + userAccount +
         ", userPassword=" + userPassword +
+        ", secet=" + secet +
         ", userStatus=" + userStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +

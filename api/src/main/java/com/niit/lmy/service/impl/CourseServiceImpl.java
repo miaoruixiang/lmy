@@ -58,8 +58,12 @@ public class CourseServiceImpl implements CourseService {
         if (list.size() != 0){
             for (int i = 0;i < list.size();i ++){
                List<Role> roles = roleMapper.getRole(account,list.get(i).getCourseId());
+               UserInfo userInfo = userInfoMapper.selectList(
+                       new EntityWrapper<UserInfo>().eq("user_account",list.get(i).getCreateUserAccount())
+               ).get(0);
                JSONObject jsonObject = new JSONObject();
-               jsonObject.put("curse",list.get(i));
+               jsonObject.put("course",list.get(i));
+               jsonObject.put("createUser",userInfo);
                jsonObject.put("role",roles);
                jsonArray.add(jsonObject);
             }

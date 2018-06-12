@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -20,13 +21,14 @@ public class UserLoginMapperTest {
 
     @Test
     public void selectAll(){
+
     }
 
     @Test
     public void updatePassword(){
-//        List<UserLogin> userLogins = userLoginMapper.selectList(
-//                new EntityWrapper<UserLogin>().eq("user_account", "15195226887")
-//        );
-//        System.out.println(userLogins.get(0));
+        List<UserLogin> userLogins = userLoginMapper.selectList(
+                new EntityWrapper<UserLogin>().eq("user_account", "15195226887")
+        );
+        System.out.println(userLogins.get(0));
     }
 }

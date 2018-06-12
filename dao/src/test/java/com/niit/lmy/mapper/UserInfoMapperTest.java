@@ -21,8 +21,8 @@ public class UserInfoMapperTest {
 
     @Test
     public void selectAll(){
-        List<UserInfo> users = userInfoMapper.selectList(new EntityWrapper<>());
-        users.forEach(user -> System.out.println(user));
+//        List<UserInfo> users = userInfoMapper.selectList(new EntityWrapper<>());
+//        users.forEach(user -> System.out.println(user));
     }
 
     @Test
